@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MISAKA Wallet — Privacy Policy</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         max-width: 760px; margin: 40px auto; padding: 0 20px; color: #1a1a1a; background: #fff; }
+  @media (prefers-color-scheme: dark) { body { color: #e6e6e6; background: #14151a; } a { color: #6ea8fe; } code { background:#23252b; } }
+  h1 { font-size: 1.7rem; margin-bottom: 0; }
+  h2 { font-size: 1.15rem; margin-top: 2rem; border-bottom: 1px solid #8884; padding-bottom: 4px; }
+  .updated { color: #888; font-size: .9rem; margin-top: 4px; }
+  .tldr { background: #6ea8fe1a; border-left: 3px solid #6ea8fe; padding: 12px 16px; border-radius: 6px; margin: 18px 0; }
+  code { background: #f0f0f3; padding: 1px 5px; border-radius: 4px; font-size: .9em; }
+  ul { padding-left: 1.3rem; }
+  footer { margin-top: 3rem; color: #888; font-size: .85rem; border-top: 1px solid #8884; padding-top: 12px; }
+</style>
+</head>
+<body>
+<h1>MISAKA Wallet — Privacy Policy</h1>
+<p class="updated">Last updated: 2026-06-08</p>
+
+<p>MISAKA Wallet ("the extension") is a <strong>self-custody, client-side</strong> browser extension
+for the MISAKA (kaspa-pq) post-quantum network. It is designed to handle as little data as possible.</p>
+
+<div class="tldr">
+<strong>In short:</strong> We collect <strong>nothing</strong>. There is no developer server, no
+account, no analytics, no telemetry, and no tracking. Your keys are encrypted and <strong>never leave
+your device</strong>. The only network traffic is the blockchain requests your wallet makes to show
+balances and send transactions.
+</div>
+
+<h2>1. Data we collect</h2>
+<p><strong>None.</strong> The developer operates <strong>no backend server</strong> for this
+extension and receives <strong>no</strong> personal data, analytics, telemetry, or usage statistics
+from it.</p>
+
+<h2>2. Data stored on your device (never transmitted)</h2>
+<ul>
+  <li><strong>Recovery phrase / private key</strong> — encrypted with <strong>AES-256-GCM</strong>
+  under a key derived from your password via <strong>PBKDF2-HMAC-SHA-512 (600,000 iterations)</strong>,
+  stored only in the browser's extension-local storage. It is <strong>never</strong> stored in
+  plaintext and <strong>never</strong> transmitted. A wrong password fails authentication — there is
+  no decryption oracle.</li>
+  <li><strong>Settings</strong> — selected network, auto-lock timeout, and an optional custom node URL.</li>
+</ul>
+<p>The decrypted key exists only in volatile memory while the wallet is unlocked, and is wiped on
+manual lock, idle auto-lock, or browser close.</p>
+
+<h2>3. Network connections</h2>
+<p>To show balances and broadcast transactions, the extension connects <strong>directly from your
+browser</strong> to a MISAKA node and block explorer (by default <code>misakascan.com</code>, or a
+custom node URL you set in Settings):</p>
+<ul>
+  <li><strong>WebSocket RPC</strong> (<code>wss://misakascan.com/kaspa</code>) — read your address's
+  balance/UTXOs and submit the transactions you sign.</li>
+  <li><strong>Explorer REST API</strong> (<code>https://misakascan.com/addresses/…</code>) — fetch
+  your address's transaction history for the Activity view.</li>
+  <li><strong>Local node</strong> (<code>ws://127.0.0.1</code>, <code>ws://localhost</code>) — used
+  only if you choose to run your own node.</li>
+</ul>
+<p>These requests contain only the public blockchain data needed: your <strong>public address</strong>
+(to query it) and the <strong>signed transactions</strong> you choose to send. Your private key is
+<strong>never</strong> sent. As with any blockchain node, the node/explorer operator can observe the
+public addresses and transactions queried through it; set your own node URL in Settings if you prefer.</p>
+
+<h2>4. Permissions</h2>
+<ul>
+  <li><code>storage</code> — save your encrypted vault and settings locally.</li>
+  <li><code>alarms</code> — enforce the idle auto-lock timer.</li>
+  <li>host access to <code>*.misakascan.com</code>, <code>127.0.0.1</code>, and <code>localhost</code>
+  — connect to the MISAKA node/explorer to read balances and submit transactions.</li>
+</ul>
+
+<h2>5. Remote code</h2>
+<p>The extension loads <strong>no remote code</strong>. All JavaScript and the WebAssembly signing
+core are bundled in the package; the Content Security Policy forbids remote scripts.</p>
+
+<h2>6. Data sharing &amp; sale</h2>
+<p>We do <strong>not</strong> sell or transfer your data to third parties. We do <strong>not</strong>
+use or transfer your data for any purpose unrelated to the wallet's single purpose, and
+<strong>never</strong> for determining creditworthiness or for lending. (We hold no such data to
+begin with.)</p>
+
+<h2>7. Children</h2>
+<p>The extension is a financial tool and is not directed to children under 13.</p>
+
+<h2>8. Changes to this policy</h2>
+<p>We may update this policy from time to time. Changes are posted at this URL with a new
+"Last updated" date.</p>
+
+<h2>9. Contact</h2>
+<p>Questions or requests: open an issue at
+<a href="https://github.com/MISAKA-BTC/misakas">https://github.com/MISAKA-BTC/misakas</a>.</p>
+
+<footer>MISAKA Wallet is open-source, self-custody software for the MISAKA (kaspa-pq) post-quantum
+network. ML-DSA-87 (FIPS 204) signatures · no secp256k1 path.</footer>
+</body>
+</html>
