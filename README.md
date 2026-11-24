@@ -1,4 +1,4 @@
-# MISAKA Wallet — Privacy Policy
+# Wallet — Privacy Policy
 
 _Last updated: 2026-06-08_
 
